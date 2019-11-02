@@ -24,7 +24,7 @@ hs_err_pid*
 
 # my ignored folders
 *.iml
-*.idea
+.idea
 target
 build
 temp
