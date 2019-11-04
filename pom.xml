@@ -12,7 +12,7 @@
     <properties>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
-        <java.version>11</java.version>
+        <java.version>13</java.version>
     </properties>
 
     <dependencies>

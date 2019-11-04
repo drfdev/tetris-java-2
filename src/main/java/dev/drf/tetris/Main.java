@@ -1,7 +1,17 @@
 package dev.drf.tetris;
 
+import dev.drf.tetris.game.TetrisGame;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("test");
+        // preload:
+        System.out.println("Tetris runnnig...");
+
+        TetrisGame game = new TetrisGame();
+        game.preload();
+
+        // start the game:
+        System.out.println("Game starting...");
+        game.startGame();
     }
 }
