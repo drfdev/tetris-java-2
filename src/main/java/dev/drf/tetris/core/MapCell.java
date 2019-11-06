@@ -31,6 +31,10 @@ public final class MapCell {
         status = CellStatus.EMPTY;
     }
 
+    public void fill() {
+        status = CellStatus.FILLED;
+    }
+
     public static MapCell of(int number) {
         return new MapCell(number);
     }

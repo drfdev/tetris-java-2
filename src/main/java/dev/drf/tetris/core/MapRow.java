@@ -7,7 +7,7 @@ import java.util.Objects;
 public final class MapRow {
     private final int number;
     private final List<MapCell> cells;
-    
+
     private MapRow(int number, int length) {
         this.number = number;
         this.cells = new ArrayList<>(length);
@@ -22,6 +22,10 @@ public final class MapRow {
 
     public int getNumber() {
         return number;
+    }
+
+    public List<MapCell> getCells() {
+        return cells;
     }
 
     public void copyRow(MapRow row) {

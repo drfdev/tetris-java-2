@@ -1,5 +1,6 @@
 package dev.drf.tetris.game;
 
+import dev.drf.tetris.console.TetrisConsole;
 import dev.drf.tetris.core.MapContainer;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ public class TetrisGame {
     private MapContainer container;
     private MapInteractor interactor;
     private StepByStep stepByStep;
+    private TetrisConsole console;
 
     public TetrisGame() {
     }
@@ -35,6 +37,8 @@ public class TetrisGame {
         container = new MapContainer(width, height);
         interactor = new MapInteractor();
         stepByStep = new StepByStep();
+
+        console = new TetrisConsole();
     }
 
     public void startGame() {
