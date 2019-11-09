@@ -1,5 +1,6 @@
 package dev.drf.tetris;
 
+import dev.drf.tetris.console.ConsoleInput;
 import dev.drf.tetris.game.TetrisGame;
 
 public class Main {
@@ -12,6 +13,6 @@ public class Main {
 
         // start the game:
         System.out.println("Game starting...");
-        game.startGame();
+        game.startGame(new ConsoleInput());
     }
 }
