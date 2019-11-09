@@ -13,6 +13,7 @@
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
         <java.version>13</java.version>
+        <java.enable.preview>--enable-preview</java.enable.preview>
     </properties>
 
     <dependencies>
@@ -41,7 +42,7 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>${java.version}</release>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <compilerArgs>${java.enable.preview}</compilerArgs>
                 </configuration>
             </plugin>
             <!-- for tests -->
@@ -50,7 +51,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <argLine>--enable-preview</argLine>
+                    <argLine>${java.enable.preview}</argLine>
                 </configuration>
             </plugin>
             <plugin>
