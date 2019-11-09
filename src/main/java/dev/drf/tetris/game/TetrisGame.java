@@ -16,6 +16,8 @@ public class TetrisGame {
     private static final String RIGHT_MOVE_COMMAND = "d";
     private static final String ROTATE_FIGURE_COMMAND = "w";
     private static final String DOWN_MOVE_COMMAND = "s";
+    private static final String SKIP_COMMAND = "q";
+    private static final String EMPTY_COMMAND = "";
 
     private MapContainer container;
     private StepByStep stepByStep;
@@ -68,6 +70,7 @@ public class TetrisGame {
                 case RIGHT_MOVE_COMMAND -> stepByStep.moveFigure(container, RIGHT);
                 case ROTATE_FIGURE_COMMAND -> stepByStep.rotateFigure(container);
                 case DOWN_MOVE_COMMAND -> stepByStep.moveFigure(container, DOWN);
+                case EMPTY_COMMAND, SKIP_COMMAND -> {}
             }
         }
     }
