@@ -1,5 +1,7 @@
 package dev.drf.tetris.core;
 
+import dev.drf.tetris.game.MoveDirection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class MapContainer {
     private final int width;
     //    private final int height;
     private final List<MapRow> rows;
+    private Figure figure;
 
     public MapContainer(int width, int height) {
         this.width = width;
@@ -29,8 +32,31 @@ public class MapContainer {
         return rows;
     }
 
+    public Figure getFigure() {
+        return figure;
+    }
+
     public void fillCell(int row, int cell) {
         rows.get(row).getCells().get(cell).fill();
     }
-    // TODO банка
+
+    public boolean anyFigure() {
+        return figure != null;
+    }
+
+    public void generateRandomFigure() {
+        figure = Figure.randomFigure();
+    }
+
+    public void moveFigure(MoveDirection direction) {
+        if (anyFigure()) {
+            // TODO
+        }
+    }
+
+    public void rotateFigure() {
+        if (anyFigure()) {
+            // TODO
+        }
+    }
 }

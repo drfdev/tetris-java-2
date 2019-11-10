@@ -16,6 +16,9 @@ public class StepByStep {
 
     public void nextStep(MapContainer map) {
         currentTic++;
+        if (!map.anyFigure()) {
+            map.generateRandomFigure();
+        }
         if (currentTic >= ticCount) {
             currentTic = 0;
             moveFigure(map, DOWN);
@@ -23,10 +26,10 @@ public class StepByStep {
     }
 
     public void moveFigure(MapContainer map, MoveDirection direction) {
-        // TODO
+        map.moveFigure(direction);
     }
 
     public void rotateFigure(MapContainer map) {
-        // TODO
+        map.rotateFigure();
     }
 }
