@@ -11,12 +11,18 @@ public class MapContainer {
     private final List<MapRow> rows;
     private Figure figure;
 
+    private MapCell baseCell;
+
     public MapContainer(int width, int height) {
         this.width = width;
 //        this.height = height;
         this.rows = new ArrayList<>(height);
         for (int i = 0; i < height; ++i) {
-            rows.add(MapRow.of(i, width));
+            MapRow row = MapRow.of(i, width);
+            rows.add(row);
+            if (i == 0) {
+                baseCell = row.getCells().get(width / 2);
+            }
         }
     }
 
@@ -46,6 +52,7 @@ public class MapContainer {
 
     public void generateRandomFigure() {
         figure = Figure.randomFigure();
+        figure.setBaseCell(baseCell);
     }
 
     public void moveFigure(MoveDirection direction) {

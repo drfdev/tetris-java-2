@@ -21,6 +21,14 @@ public final class Figure {
         return rotate;
     }
 
+    public MapCell getBaseCell() {
+        return baseCell;
+    }
+
+    public void setBaseCell(MapCell baseCell) {
+        this.baseCell = baseCell;
+    }
+
     public static Figure of(FigureType type, FigureRotate rotate) {
         return new Figure(type, rotate);
     }
