@@ -12,6 +12,7 @@ import static dev.drf.tetris.game.MoveDirection.*;
 
 public class TetrisGame {
     private static final String EXIT_COMMAND = "exit";
+    private static final String SHORT_EXIT_COMMAND = "e";
     private static final String LEFT_MOVE_COMMAND = "a";
     private static final String RIGHT_MOVE_COMMAND = "d";
     private static final String ROTATE_FIGURE_COMMAND = "w";
@@ -61,16 +62,18 @@ public class TetrisGame {
             if (command == null) {
                 throw new RuntimeException("Null command");
             }
-            if (EXIT_COMMAND.equals(command)) {
+            if (EXIT_COMMAND.equals(command)
+                    || SHORT_EXIT_COMMAND.equals(command)) {
                 break;
             }
 
-            switch(command) {
+            switch (command) {
                 case LEFT_MOVE_COMMAND -> stepByStep.moveFigure(container, LEFT);
                 case RIGHT_MOVE_COMMAND -> stepByStep.moveFigure(container, RIGHT);
                 case ROTATE_FIGURE_COMMAND -> stepByStep.rotateFigure(container);
                 case DOWN_MOVE_COMMAND -> stepByStep.moveFigure(container, DOWN);
-                case EMPTY_COMMAND, SKIP_COMMAND -> {}
+                case EMPTY_COMMAND, SKIP_COMMAND -> {
+                }
             }
         }
     }

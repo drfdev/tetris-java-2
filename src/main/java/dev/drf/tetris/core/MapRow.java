@@ -12,7 +12,7 @@ public final class MapRow {
         this.number = number;
         this.cells = new ArrayList<>(length);
         for (int i = 0; i < length; ++i) {
-            cells.add(MapCell.of(i));
+            cells.add(MapCell.of(i, number));
         }
     }
 

@@ -3,16 +3,22 @@ package dev.drf.tetris.core;
 import java.util.Objects;
 
 public final class MapCell {
+    private final int row;
     private final int number;
     private CellStatus status;
 
-    private MapCell(int number) {
+    private MapCell(int number, int row) {
         this.number = number;
+        this.row = row;
         this.status = CellStatus.EMPTY;
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public int getRow() {
+        return row;
     }
 
     public CellStatus getStatus() {
@@ -35,8 +41,8 @@ public final class MapCell {
         status = CellStatus.FILLED;
     }
 
-    public static MapCell of(int number) {
-        return new MapCell(number);
+    public static MapCell of(int number, int row) {
+        return new MapCell(number, row);
     }
 
     @Override
@@ -48,11 +54,12 @@ public final class MapCell {
             return false;
         }
         MapCell mapCell = (MapCell) o;
-        return number == mapCell.number;
+        return row == mapCell.row &&
+                number == mapCell.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(row, number);
     }
 }

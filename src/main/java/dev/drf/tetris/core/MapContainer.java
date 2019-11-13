@@ -34,6 +34,14 @@ public class MapContainer {
         return rows.size();
     }
 
+    public int lastRow() {
+        return getHeight() - 1;
+    }
+
+    public int lastCell() {
+        return getWidth() - 1;
+    }
+
     public List<MapRow> getRows() {
         return rows;
     }
@@ -42,8 +50,12 @@ public class MapContainer {
         return figure;
     }
 
+    public MapCell getCell(int row, int cell) {
+        return rows.get(row).getCells().get(cell);
+    }
+
     public void fillCell(int row, int cell) {
-        rows.get(row).getCells().get(cell).fill();
+        getCell(row, cell).fill();
     }
 
     public boolean anyFigure() {
@@ -53,17 +65,56 @@ public class MapContainer {
     public void generateRandomFigure() {
         figure = Figure.randomFigure();
         figure.setBaseCell(baseCell);
+        remapFigureCells();
     }
 
     public void moveFigure(MoveDirection direction) {
         if (anyFigure()) {
-            // TODO
+            clearFigureCells();
+            MapCell currentBaseCell = figure.getBaseCell();
+            MapCell newBaseCell = calculateBaseCells(currentBaseCell, direction);
+            figure.setBaseCell(newBaseCell);
+
+            // TODO detect position
+
+            remapFigureCells();
         }
     }
 
     public void rotateFigure() {
         if (anyFigure()) {
-            // TODO
+            clearFigureCells();
+
+            figure.rotate();
+            // TODO detect position
+
+            remapFigureCells();
         }
+    }
+
+    private MapCell calculateBaseCells(MapCell baseCell, MoveDirection direction) {
+        final int row = baseCell.getRow();
+        final int cell = baseCell.getNumber();
+
+        int newRow = direction == MoveDirection.DOWN
+                ? Math.min(row + 1, getHeight() - 1)
+                : row;
+        int newCell = switch (direction) {
+            case LEFT -> Math.max(0, cell - 1);
+            case RIGHT -> Math.min(width - 1, cell + 1);
+            default -> cell;
+        };
+
+        return getCell(newRow, newCell);
+    }
+
+    private void clearFigureCells() {
+        List<MapCell> cells = figure.detectCells(this);
+        cells.forEach(MapCell::clear);
+    }
+
+    private void remapFigureCells() {
+        List<MapCell> cells = figure.detectCells(this);
+        cells.forEach(MapCell::fill);
     }
 }
