@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static dev.drf.tetris.core.FigureRotate.*;
+import static dev.drf.tetris.core.FigureType.*;
 
 public final class Figure {
     private final FigureType type;
@@ -109,7 +110,52 @@ public final class Figure {
         final int row = baseCell.getRow();
         final int cell = baseCell.getNumber();
 
-        // TODO
+        if (rotate == TO_TOP) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell());
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 2, rcell - 1)
+            );
+        }
+        if (rotate == TO_RIGHT) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell - 1),
+                    map.getCell(rrow + 2, rcell - 1),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 2, rcell + 1)
+            );
+        }
+        if (rotate == TO_BOTTOM) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow, rcell + 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 2, rcell)
+            );
+        }
+        if (rotate == TO_LEFT) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell - 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow + 2, rcell + 1)
+            );
+        }
         return Collections.emptyList();
     }
 
@@ -117,7 +163,50 @@ public final class Figure {
         final int row = baseCell.getRow();
         final int cell = baseCell.getNumber();
 
-        // TODO
+        if (rotate == TO_TOP) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 2, rcell + 1)
+            );
+        }
+        if (rotate == TO_RIGHT) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell - 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow + 2, rcell - 1)
+            );
+        }
+        if (rotate == TO_BOTTOM) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow, rcell + 1),
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow + 2, rcell + 1)
+            );
+        }
+        if (rotate == TO_LEFT) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow + 2, rcell + 1),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 2, rcell - 1)
+            );
+        }
         return Collections.emptyList();
     }
 
@@ -138,7 +227,32 @@ public final class Figure {
         final int row = baseCell.getRow();
         final int cell = baseCell.getNumber();
 
-        // TODO
+        if (rotate == TO_TOP || rotate == TO_BOTTOM) {
+            final int rrow = Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow, rcell + 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell - 1)
+            );
+        }
+        if (rotate == TO_RIGHT || rotate == TO_LEFT) {
+            final int rrow = (row - 1) < 0
+                    ? 1
+                    : Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : cell;
+            return Arrays.asList(
+                    map.getCell(rrow - 1, rcell - 1),
+                    map.getCell(rrow, rcell - 1),
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell)
+            );
+        }
         return Collections.emptyList();
     }
 
@@ -146,7 +260,52 @@ public final class Figure {
         final int row = baseCell.getRow();
         final int cell = baseCell.getNumber();
 
-        // TODO
+        if (rotate == TO_TOP) {
+            final int rrow = Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell - 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow, rcell)
+            );
+        }
+        if (rotate == TO_RIGHT) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 1, rcell + 1)
+            );
+        }
+        if (rotate == TO_BOTTOM) {
+            final int rrow = Math.min(row, map.lastRow() - 2);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow + 1, rcell - 1),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell + 1),
+                    map.getCell(rrow + 2, rcell)
+            );
+        }
+        if (rotate == TO_LEFT) {
+            final int rrow = Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : cell;
+            return Arrays.asList(
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 2, rcell),
+                    map.getCell(rrow + 1, rcell - 1)
+            );
+        }
         return Collections.emptyList();
     }
 
@@ -154,7 +313,145 @@ public final class Figure {
         final int row = baseCell.getRow();
         final int cell = baseCell.getNumber();
 
-        // TODO
+        if (rotate == TO_TOP || rotate == TO_BOTTOM) {
+            final int rrow = Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : Math.min(cell, map.lastCell() - 1);
+            return Arrays.asList(
+                    map.getCell(rrow, rcell - 1),
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow + 1, rcell),
+                    map.getCell(rrow + 1, rcell + 1)
+            );
+        }
+        if (rotate == TO_RIGHT || rotate == TO_LEFT) {
+            final int rrow = (row - 1) < 0
+                    ? 1
+                    : Math.min(row, map.lastRow() - 1);
+            final int rcell = (cell - 1) < 0
+                    ? 1
+                    : cell;
+            return Arrays.asList(
+                    map.getCell(rrow - 1, rcell),
+                    map.getCell(rrow, rcell),
+                    map.getCell(rrow, rcell - 1),
+                    map.getCell(rrow + 1, rcell - 1)
+            );
+        }
         return Collections.emptyList();
+    }
+
+    public void changeBaseCell(MapContainer map, MapCell baseCell) {
+        MapCell current = getBaseCell();
+        FigureType type = getType();
+
+        final int cell = baseCell.getNumber();
+        final int maxCell = map.lastCell();
+
+        if (type == I_BLOCK) {
+            if (rotate == TO_TOP || rotate == TO_BOTTOM) {
+                if (cell - 2 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+        }
+        if (type == J_BLOCK) {
+            if (rotate == TO_TOP) {
+                if (cell - 1 < 0) {
+                    return;
+                }
+            }
+            if (rotate == TO_RIGHT) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_BOTTOM) {
+                if (cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_LEFT) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+        }
+        if (type == L_BLOCK) {
+            if (rotate == TO_TOP) {
+                if (cell + 2 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_RIGHT) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_BOTTOM) {
+                if (cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_LEFT) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+        }
+        if (type == O_BLOCK) {
+            if (cell + 1 > maxCell) {
+                return;
+            }
+        }
+        if (type == S_BLOCK) {
+            if (rotate == TO_TOP || rotate == TO_BOTTOM) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_RIGHT || rotate == TO_LEFT) {
+                if (cell - 1 < 0) {
+                    return;
+                }
+            }
+        }
+        if (type == T_BLOCK) {
+            if (rotate == TO_TOP) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_RIGHT) {
+                if (cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_BOTTOM) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_LEFT) {
+                if (cell - 1 < 0) {
+                    return;
+                }
+            }
+        }
+        if (type == Z_BLOCK) {
+            if (rotate == TO_TOP || rotate == TO_BOTTOM) {
+                if (cell - 1 < 0 || cell + 1 > maxCell) {
+                    return;
+                }
+            }
+            if (rotate == TO_RIGHT || rotate == TO_LEFT) {
+                if (cell - 1 < 0) {
+                    return;
+                }
+            }
+        }
+
+        setBaseCell(baseCell);
     }
 }

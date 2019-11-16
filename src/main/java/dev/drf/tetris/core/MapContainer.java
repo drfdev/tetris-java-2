@@ -73,7 +73,7 @@ public class MapContainer {
             clearFigureCells();
             MapCell currentBaseCell = figure.getBaseCell();
             MapCell newBaseCell = calculateBaseCells(currentBaseCell, direction);
-            figure.setBaseCell(newBaseCell);
+            figure.changeBaseCell(this, newBaseCell);
 
             // TODO detect position
 
